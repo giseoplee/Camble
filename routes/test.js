@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
         if (cursor.length > 0)
             res.status(200).json(cursor);
         else
-           res.status(503).json({message : "not_found_data_yo"});
+           res.status(503).json({message : "not_found_data_yo!!!!!!!!!!!!!"});
     });
 });
 
