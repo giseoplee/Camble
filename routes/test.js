@@ -17,7 +17,7 @@ var connection = mysql.createConnection({
 });
 
 router.get('/:school_id', function(req, res, next) {
-    connection.query('select * from camble_school where id=?;',
+    connection.query('select * from camble_schools where id=?;',
                      [req.params.school_id], function (error, cursor) { 
         if (cursor.length > 0)
             res.status(200).json(cursor);
