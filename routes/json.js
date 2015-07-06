@@ -22,8 +22,7 @@ var connection = mysql.createConnection({
 
 var smtpTransport = nodemailer.createTransport(smtp({
     service: 'Gmail',
-    auth: { user: 'giseopl@gmail.com', pass: 'dlrltjq14' },
-    secure : true
+    auth: { user: 'giseopl@gmail.com', pass: 'dlrltjq14' }
 }));
 
 // var smtpTransport = nodemailer.createTransport('SMTP', {
