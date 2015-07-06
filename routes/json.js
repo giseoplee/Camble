@@ -4,8 +4,8 @@ var str2json = require('string-to-json');
 // var http = require('http');
 var bodyParser = require('body-parser');
 var nodemailer = require('nodemailer'); // 메일 사용
-var smtp = require('nodemailer-smtp-transport');
-var email = require('emailjs/email');
+//var smtp = require('nodemailer-smtp-transport');
+//var email = require('emailjs/email');
 var router = express.Router();
 
 // /* GET users listing. */

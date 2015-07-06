@@ -11,6 +11,7 @@ var test = require('./routes/test');
 var json = require('./routes/json');
 var debug = require('./routes/debug');
 var push = require('./routes/push');
+//var push2  = require('./routes/push2');
 var file  = require('./routes/file');
 var new_login  = require('./routes/auth/new');
 var multer = require('multer');
@@ -44,6 +45,7 @@ app.use('/test', test);
 app.use('/json', json);
 app.use('/debug', debug);
 app.use('/push', push);
+//app.use('/push2', push2);
 app.use('/file', file);
 app.use('/auth/new', new_login);
 
@@ -81,4 +83,4 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
-app.listen(3000);
+//app.listen(3000);
