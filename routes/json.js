@@ -5,6 +5,7 @@ var str2json = require('string-to-json');
 var bodyParser = require('body-parser');
 var nodemailer = require('nodemailer'); // 메일 사용
 var smtp = require('nodemailer-smtp-transport');
+var email = require('emailjs/email');
 var router = express.Router();
 
 // /* GET users listing. */
@@ -19,12 +20,34 @@ var connection = mysql.createConnection({
     'database':'camble'
 });
 
-var smtpTransport = nodemailer.createTransport(smtp({
-    service: 'Gmail',
-    //host : 'Camble@camble.com',
-    auth: { user: 'giseopl@gmail.com', pass: 'dlrltjq14' }
-    //secure : true
-}));
+var server  = email.server.connect({
+   user:    "giseopl@gmail.com", 
+   password:"dlrltjq14", 
+   host:    "smtp.gmail.com", 
+   ssl:     true
+});
+
+var message = {
+   text:    "i hope this works", 
+   from:    "캠블 <username@your-email.com>", 
+   to:      "<llgs901@naver.com.com>",
+   cc:      "else <else@your-email.com>",
+   subject: "testing emailjs",
+   attachment: 
+   [
+      {data:"<html>i <i>hope</i> this works!</html>", alternative:true}
+   ]
+};
+
+// send the message and get a callback with an error or details of the message that was sent
+server.send(message, function(err, message) { console.log(err || message); });
+
+// var smtpTransport = nodemailer.createTransport(smtp({
+//     service: 'Gmail',
+//     //host : 'Camble@camble.com',
+//     auth: { user: 'giseopl@gmail.com', pass: 'dlrltjq14' }
+//     //secure : true
+// }));
 
 // var smtpTransport = nodemailer.createTransport('SMTP', {
 //     //  service: 'Mandrill',
