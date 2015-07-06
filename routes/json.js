@@ -18,7 +18,7 @@ var connection = mysql.createConnection({
     'database':'camble'
 });
 
-var smtpTransport = nodemailer.createTransport("SMTP", {
+var smtpTransport = nodemailer.createTransport({
     service: 'Gmail',
     //host : 'Camble@camble.com',
     auth: { user: 'giseopl@gmail.com', pass: 'dlrltjq14' }
