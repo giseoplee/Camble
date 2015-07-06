@@ -1,5 +1,6 @@
 var express = require('express');
 var mysql = require('mysql');
+var bodyParser = require('body-parser');
 //var mysql = require('mysql');
 //var http = require('http');
 var router = express.Router();
@@ -46,7 +47,7 @@ router.get('/', function(req, res, next) {
 // });
 
 router.post('/', function(req, res, next) {
-    res.status(200).json(req);
+    res.status(200).json(req.body);
 });
 
 module.exports = router;
