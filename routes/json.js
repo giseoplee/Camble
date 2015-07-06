@@ -20,34 +20,11 @@ var connection = mysql.createConnection({
     'database':'camble'
 });
 
-var server  = email.server.connect({
-   user:    "llgs901@naver.com", 
-   password:"dlrltjq14!", 
-   host:    "smtp.naver.com", 
-   ssl:     true
-});
-
-var message = {
-   text:    "i hope this works", 
-   from:    "캠블 <username@your-email.com>", 
-   to:      "<llgs901@naver.com.com>",
-   cc:      "else <else@your-email.com>",
-   subject: "testing emailjs",
-   attachment: 
-   [
-      {data:"<html>i <i>hope</i> this works!</html>", alternative:true}
-   ]
-};
-
-// send the message and get a callback with an error or details of the message that was sent
-server.send(message, function(err, message) { console.log(err || message); });
-
-// var smtpTransport = nodemailer.createTransport(smtp({
-//     service: 'Gmail',
-//     //host : 'Camble@camble.com',
-//     auth: { user: 'giseopl@gmail.com', pass: 'dlrltjq14' }
-//     //secure : true
-// }));
+var smtpTransport = nodemailer.createTransport(smtp({
+    service: 'Gmail',
+    auth: { user: 'giseopl@gmail.com', pass: 'dlrltjq14' },
+    secure : true
+}));
 
 // var smtpTransport = nodemailer.createTransport('SMTP', {
 //     //  service: 'Mandrill',
