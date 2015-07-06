@@ -18,12 +18,20 @@ var connection = mysql.createConnection({
     'database':'camble'
 });
 
-var smtpTransport = nodemailer.createTransport("SMTP", {
-    service: 'Gmail',
-    auth: {
+// var smtpTransport = nodemailer.createTransport("SMTP", {
+//     service: 'Gmail',
+//     auth: {
+//         user: 'giseopl@gmail.com',
+//         pass: 'dlrltjq14'
+//     }
+// });
+
+var smtpTransport = nodemailer.createTransport('SMTP', {
+     service: 'Mandrill',
+     auth: { 
         user: 'giseopl@gmail.com',
-        pass: 'dlrltjq14'
-    }
+        pass: 'dlrltjq14' 
+    } 
 });
 
 //메일 발송하기, request가 timeout이 될 때까지 계속 연결되어 있음 
