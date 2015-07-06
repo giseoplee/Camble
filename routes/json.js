@@ -4,6 +4,7 @@ var str2json = require('string-to-json');
 // var http = require('http');
 var bodyParser = require('body-parser');
 var nodemailer = require('nodemailer'); // 메일 사용
+var smtp = require('nodemailer-smtp-transport');
 var router = express.Router();
 
 // /* GET users listing. */
@@ -18,12 +19,12 @@ var connection = mysql.createConnection({
     'database':'camble'
 });
 
-var smtpTransport = nodemailer.createTransport("SMTP", {
+var smtpTransport = nodemailer.createTransport(smtp({
     service: 'Gmail',
     //host : 'Camble@camble.com',
     auth: { user: 'giseopl@gmail.com', pass: 'dlrltjq14' }
     //secure : true
-});
+}));
 
 // var smtpTransport = nodemailer.createTransport('SMTP', {
 //     //  service: 'Mandrill',
