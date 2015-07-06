@@ -21,7 +21,6 @@ var connection = mysql.createConnection({
 var smtpTransport = nodemailer.createTransport("SMTP", {
     service: 'Gmail',
     host : 'Camble@camble.com',
-    port : 465,
     auth: { user: 'giseopl@gmail.com', pass: 'dlrltjq14' },
     secure : true
 });
