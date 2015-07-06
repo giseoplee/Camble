@@ -20,10 +20,10 @@ var connection = mysql.createConnection({
     'database':'camble'
 });
 
-var smtpTransport = nodemailer.createTransport(smtp({
+var smtpTransport = nodemailer.createTransport("SMTP",{
     service: 'Gmail',
     auth: { user: 'giseopl@gmail.com', pass: 'dlrltjq14' }
-}));
+});
 
 // var smtpTransport = nodemailer.createTransport('SMTP', {
 //     //  service: 'Mandrill',
