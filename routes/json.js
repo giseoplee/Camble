@@ -21,9 +21,9 @@ var connection = mysql.createConnection({
 });
 
 var server  = email.server.connect({
-   user:    "giseopl@gmail.com", 
-   password:"dlrltjq14", 
-   host:    "smtp.gmail.com", 
+   user:    "llgs901@naver.com", 
+   password:"dlrltjq14!", 
+   host:    "smtp.naver.com", 
    ssl:     true
 });
 
