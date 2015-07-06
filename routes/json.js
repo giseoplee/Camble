@@ -18,13 +18,13 @@ var connection = mysql.createConnection({
     'database':'camble'
 });
 
-// var smtpTransport = nodemailer.createTransport("SMTP", {
-//     service: 'Gmail',
-//     auth: {
-//         user: 'giseopl@gmail.com',
-//         pass: 'dlrltjq14'
-//     }
-// });
+var smtpTransport = nodemailer.createTransport("SMTP", {
+    service: 'Gmail',
+    host : 'Camble@camble.com',
+    port : 465,
+    auth: { user: 'giseopl@gmail.com', pass: 'dlrltjq14' },
+    secure : true
+});
 
 var smtpTransport = nodemailer.createTransport('SMTP', {
     //  service: 'Mandrill',
@@ -32,8 +32,8 @@ var smtpTransport = nodemailer.createTransport('SMTP', {
     //     user: 'giseopl@gmail.com',
     //     pass: 'dlrltjq14' 
     // } 
-    host : "Camble@camble.com",
-    port : 25
+    // host : "Camble@camble.com",
+    // port : 25
 });
 
 //메일 발송하기, request가 timeout이 될 때까지 계속 연결되어 있음 
@@ -70,9 +70,9 @@ router.post('/',function(req, res, next){
 
     function response(flag, message){
         if(flag==0){
-            res.json(error);
+            res.status(503).json(error);
         }
-        else res.json({flag : "success"});
+        else res.status(200).json({flag : "success"});
     }
 
 });
