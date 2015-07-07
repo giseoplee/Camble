@@ -64,6 +64,8 @@ router.post('/',function(req, res, next){
                     [req.body.auth_number],function(error, info){
                         if(error==null){
                             returnAuth = info.insertId;
+                            console.log(info);
+                            console.log(insertId);
                             flag = 1;
                         }else{
                             flag = 0;
