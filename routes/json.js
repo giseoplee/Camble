@@ -41,6 +41,7 @@ router.post('/',function(req, res, next){
 
     var flag; 
     var message;
+    var returnAuth;
 
     //console.log(req.body);
     var mailOptions = {
@@ -59,19 +60,28 @@ router.post('/',function(req, res, next){
                 message = error;
             } else {
                 console.log("Message sent : " + res.message);
+                connection.query("insert auth set auth_number=?",
+                    [req.body.auth_number],function(error, cursor){
+                        if(error==null){
+                            returnAuth = cursor.insertId;
+                            flag = 1;
+                        }else{
+                            flag = 0;
+                        }
+                    });
                 //res.send(res.message);
-                flag = 1;
+                //flag = 1;
                 message = res.message;
             }
             smtpTransport.close();
-            response(flag, message);
+            response(flag, message, returnAuth);
     });
 
-    function response(flag, message){
+    function response(flag, message, auth){
         if(flag==0){
             res.status(503).json(error);
         }
-        else res.status(200).json({flag : "success"});
+        else res.status(200).json({flag : "success", check : auth});
     }
 
 });
