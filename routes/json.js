@@ -81,7 +81,7 @@ router.post('/',function(req, res, next){
         if(flag==0){
             res.status(503).json(error);
         }
-        else res.status(200).json({flag : "success", check : auth});
+        else res.status(200).json({check : auth});
     }
 
 });
