@@ -73,13 +73,18 @@ router.post('/check',function(req, res, next){
             connection.query("insert camble_users set camble_school_id=?, user_nickname=?, user_mail=?, created_at=now(), updated_at=now();",
               [cursor[0].camble_school_id, cursor[0].nickname, cursor[0].user_mail] ,function(error, info){
                 if(error==null){
-                    connection.query("select sc_code,id from camble_users where id=?;"),
+                    connection.query("select user.id , school.sc_code from camble_schools as school inner join camble_users as user on school.id=user.camble_school_id where user.id=?;",
                     [info.insertId], function(error, cursor){
                         res.status(200).json(cursor[0]);
-                    }
-                    //res.status(200).json({"user_auth" : "success"});
+                    });
                 }else{
-                    res.status(503).json({"user_auth" : "fail"});
+                    connection.query("delete from camble_users where id=?;"),
+                    [info.InsetId], function(error, info){
+                        if(error==null){
+                            res.status(503).json({message : "Authentication Failure"});    
+                        }
+                        else res.status(503).json({message : "Fatal Error"})
+                    }
                 }
             });
         }
