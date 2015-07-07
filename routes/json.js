@@ -1,17 +1,9 @@
 var express = require('express');
 var mysql = require('mysql');
 var str2json = require('string-to-json');
-// var http = require('http');
 var bodyParser = require('body-parser');
-var nodemailer = require('nodemailer'); // 메일 사용
-//var smtp = require('nodemailer-smtp-transport');
-//var email = require('emailjs/email');
+var nodemailer = require('nodemailer');
 var router = express.Router();
-
-// /* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('테스트 용');
-// });
 
 var connection = mysql.createConnection({
     'host':'appjam.cyjao5zjyirq.us-west-2.rds.amazonaws.com',
@@ -25,25 +17,12 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
     auth: { user: 'giseopl@gmail.com', pass: 'dlrltjq14' }
 });
 
-// var smtpTransport = nodemailer.createTransport('SMTP', {
-//     //  service: 'Mandrill',
-//     //  auth: { 
-//     //     user: 'giseopl@gmail.com',
-//     //     pass: 'dlrltjq14' 
-//     // } 
-//     // host : "Camble@camble.com",
-//     // port : 25
-// });
-
-//메일 발송하기, request가 timeout이 될 때까지 계속 연결되어 있음 
-
-router.post('/json',function(req, res, next){   
+router.post('/',function(req, res, next){   
 
     var flag; 
     var message;
     var returnAuth;
 
-    //console.log(req.body);
     var mailOptions = {
         from: '캠블 <camble@camble.com>',
         to: req.body.mail_address,
@@ -59,8 +38,8 @@ router.post('/json',function(req, res, next){
                 message = error;
             } else {
                 console.log("Message sent : " + res.message);
-                connection.query("insert auth set auth_number=?, nickname=?, sc_code=?, camble_school_id=?",
-                    [req.body.auth_number, req.body.nickname, req.body.sc_code, req.body.camble_school_id],function(error, info){
+                connection.query("insert auth set auth_number=?, nickname=?, sc_code=?, camble_school_id=?, user_mail=?;",
+                    [req.body.auth_number, req.body.nickname, req.body.sc_code, req.body.camble_school_id, req.body.mail_address],function(error, info){
                         if(error==null){
                             flag = 1;
                             response(flag, info.insertId);
@@ -84,7 +63,25 @@ router.post('/json',function(req, res, next){
     }
 });
 
-//router.post('/check')
+router.post('/check',function(req, res, next){
+
+    connection.query("select * from auth where id=?"),
+    [req.body.key], function(error, cursor){
+        if(cursor[0].auth_number!=req.body.input_number){
+            res.status(503).json(message : "Authentication Failure");
+        }else{
+            connection.query("insert camble_users set camble_school_id=?, user_nickname=?, user_mail=?, created_at=now(), updated_at=now();"),
+              [cursor[0].camble_school_id, cursor[0].nickname, cursor[0].user_mail] ,function(error, info){
+                if(error==null){
+                    res.status(200).json("user_auth" : "success");
+                }else{
+                    res.status(503).json("user_auth" : "fail");
+                }
+            }
+        }
+    }
+
+});
 
 
 
