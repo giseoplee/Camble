@@ -65,7 +65,7 @@ router.post('/',function(req, res, next){
                         if(error==null){
                             returnAuth = info.insertId;
                             console.log(info);
-                            console.log(insertId);
+                            console.log(returnAuth)
                             flag = 1;
                         }else{
                             flag = 0;
