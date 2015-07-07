@@ -99,7 +99,7 @@ function nickNameCheck(nick, sc_id){
         if(cursor[0].length > 0){
             res.status(503).json({message : "Duplicate aliases"});
         }
-    }
+    });
 }
 
 module.exports = router;
