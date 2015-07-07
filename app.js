@@ -14,6 +14,7 @@ var push = require('./routes/push');
 //var push2  = require('./routes/push2');
 var file  = require('./routes/file');
 var new_login  = require('./routes/auth/new');
+var existing_login  = require('./routes/auth/exist');
 var multer = require('multer');
 
 var app = express();
@@ -50,6 +51,7 @@ app.use('/push', push);
 //app.use('/push2', push2);
 app.use('/file', file);
 app.use('/auth/new', new_login);
+app.use('/auth/exist', existing_login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

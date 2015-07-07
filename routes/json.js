@@ -111,52 +111,52 @@ router.post('/check',function(req, res, next){
 // });
 
 
-// // sc_code 받아서 테이블 생성하기 {어드민에서 사용}
-// router.post('/', function(req, res, next) {
-// var query = connection.query('create table univ_'+req.body.sc_code+'_board('+
-//                  'id int(11) not null auto_increment primary key,'+
-//                  'camble_school_id int(11) not null,'+
-//                  'camble_user_id int(11) not null,'+
-//                  'posts_writer varchar(45) not null,'+
-//                  'posts_title varchar(255) not null,'+
-//                  'posts_contents text, '+
-//                  'posts_image varchar(200), '+
-//                  'view_count int(10) default 0, '+
-//                  'likes_count int(10) default 0, '+
-//                  'comment_count int(5) default 0, '+
-//                  'top_fixed tinyint(1) default 0, '+
-//                  'category int(4) default 0, '+
-//                  'created_at datetime not null, '+
-//                  'updated_at datetime not null, '+
-//                  'foreign key (camble_school_id) references camble_schools (id), '+
-//                  'foreign key (camble_user_id) references camble_users (id) );',
-//                   function (error, info) {
-//                     if(error==null) {
-//                            var comment_query = connection.query('create table univ_'+req.body.sc_code+'_board_comment('+
-//                                              'id int(11) not null auto_increment primary key, '+
-//                                              'univ_'+req.body.sc_code+'_board_id int(11) not null, '+
-//                                              'camble_user_id int(11) not null, '+
-//                                              'comment_writer varchar(45) not null, '+
-//                                              'comment_contents text, '+
-//                                              'likes_count int(10) default 0, '+
-//                                              'created_at datetime not null, '+
-//                                              'updated_at datetime not null, '+
-//                                              'foreign key (camble_user_id) references camble_users (id), '+
-//                                              'foreign key(univ_'+req.body.sc_code+'_board_id) references univ_'+req.body.sc_code+'_board (id) on delete cascade );',
-//                                               function (error, info) {
-//                             if (error==null) {
-//                                 res.json({ message : "table_create_success" });
-//                             }
-//                             else
-//                                 connection.query("drop table univ_"+req.body.sc_code+"_board;");
-//                                 res.json(error);
-//                             });
-//                     }
-//                     else{
-//                         res.json(error);
-//                     }
-//                 });
-//             });
+// sc_code 받아서 테이블 생성하기 {어드민에서 사용}
+router.post('/', function(req, res, next) {
+var query = connection.query('create table univ_'+req.body.sc_code+'_board('+
+                 'id int(11) not null auto_increment primary key,'+
+                 'camble_school_id int(11) not null,'+
+                 'camble_user_id int(11) not null,'+
+                 'posts_writer varchar(45) not null,'+
+                 'posts_title varchar(255) not null,'+
+                 'posts_contents text, '+
+                 'posts_image varchar(200), '+
+                 'view_count int(10) default 0, '+
+                 'likes_count int(10) default 0, '+
+                 'comment_count int(5) default 0, '+
+                 'top_fixed tinyint(1) default 0, '+
+                 'category int(4) default 0, '+
+                 'created_at datetime not null, '+
+                 'updated_at datetime not null, '+
+                 'foreign key (camble_school_id) references camble_schools (id), '+
+                 'foreign key (camble_user_id) references camble_users (id) );',
+                  function (error, info) {
+                    if(error==null) {
+                           var comment_query = connection.query('create table univ_'+req.body.sc_code+'_board_comment('+
+                                             'id int(11) not null auto_increment primary key, '+
+                                             'univ_'+req.body.sc_code+'_board_id int(11) not null, '+
+                                             'camble_user_id int(11) not null, '+
+                                             'comment_writer varchar(45) not null, '+
+                                             'comment_contents text, '+
+                                             'likes_count int(10) default 0, '+
+                                             'created_at datetime not null, '+
+                                             'updated_at datetime not null, '+
+                                             'foreign key (camble_user_id) references camble_users (id), '+
+                                             'foreign key(univ_'+req.body.sc_code+'_board_id) references univ_'+req.body.sc_code+'_board (id) on delete cascade );',
+                                              function (error, info) {
+                            if (error==null) {
+                                res.json({ message : "table_create_success" });
+                            }
+                            else
+                                connection.query("drop table univ_"+req.body.sc_code+"_board;");
+                                res.json(error);
+                            });
+                    }
+                    else{
+                        res.json(error);
+                    }
+                });
+            });
 
 
 
