@@ -79,11 +79,11 @@ router.post('/',function(req, res, next){
             response(flag, message, returnAuth);
     });
 
-    function response(flag, message, auth){
+    function response(flag, message, returnAuth){
         if(flag==0){
             res.status(503).json(error);
         }
-        else res.status(200).json({message : "success", check : auth});
+        else res.status(200).json({message : "success", check : returnAuth});
     }
 
 });
