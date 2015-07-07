@@ -64,8 +64,6 @@ router.post('/',function(req, res, next){
                     [req.body.auth_number],function(error, info){
                         if(error==null){
                             returnAuth = info.insertId;
-                            console.log(info);
-                            console.log(returnAuth)
                             flag = 1;
                         }else{
                             flag = 0;
@@ -76,6 +74,7 @@ router.post('/',function(req, res, next){
                 message = res.message;
             }
             smtpTransport.close();
+            console.log(returnAuth);
             response(flag, message, returnAuth);
     });
 
