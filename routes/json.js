@@ -60,31 +60,29 @@ router.post('/',function(req, res, next){
                 message = error;
             } else {
                 console.log("Message sent : " + res.message);
-                connection.query("insert auth set auth_number=?",
-                    [req.body.auth_number],function(error, info){
+                connection.query("insert auth set auth_number=?, nickname=?",
+                    [req.body.auth_number, req.body.nickname],function(error, info){
                         if(error==null){
-                            response(flag, message, info.insertId);
                             flag = 1;
+                            response(flag, info.insertId);
                         }else{
                             flag = 0;
+                            response(flag, info.message);
                         }
                     });
-                //res.send(res.message);
-                //flag = 1;
                 message = res.message;
             }
             smtpTransport.close();
             
     });
 
-    function response(flag, message, returnAuth){
+    function response(flag, Authkey){
         var auth = returnAuth;
         if(flag==0){
             res.status(503).json(error);
         }
-        else res.status(200).json({message : auth});
+        else res.status(200).json({message : "success", key : Authkey});
     }
-
 });
 
 
