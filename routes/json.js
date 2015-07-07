@@ -68,14 +68,14 @@ router.post('/check',function(req, res, next){
     connection.query("select * from auth where id=?"),
     [req.body.key], function(error, cursor){
         if(cursor[0].auth_number!=req.body.input_number){
-            res.status(503).json(message : "Authentication Failure");
+            res.status(503).json({message : "Authentication Failure"});
         }else{
             connection.query("insert camble_users set camble_school_id=?, user_nickname=?, user_mail=?, created_at=now(), updated_at=now();"),
               [cursor[0].camble_school_id, cursor[0].nickname, cursor[0].user_mail] ,function(error, info){
                 if(error==null){
-                    res.status(200).json("user_auth" : "success");
+                    res.status(200).json({"user_auth" : "success"});
                 }else{
-                    res.status(503).json("user_auth" : "fail");
+                    res.status(503).json({"user_auth" : "fail"});
                 }
             }
         }
