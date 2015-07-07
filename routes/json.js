@@ -55,7 +55,6 @@ router.post('/',function(req, res, next){
 
             if (error){
                 console.log(error);
-                // res.send(error);
                 flag = 0;
                 message = error;
             } else {
