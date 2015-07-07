@@ -35,7 +35,9 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(multer({ 
    dest: './files/',
-   rename: function (fieldname, filename) { return "image_" + Date.now() + "." + filename.split('.').pop(); }
+   rename: function (fieldname, filename) {
+    return "image_" + Date.now() + "." + filename.split('.').pop(); 
+  }
 }));
 
 app.use('/file', file);
@@ -83,4 +85,4 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
-//app.listen(3000);
+app.listen(3000);
