@@ -37,7 +37,7 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
 
 //메일 발송하기, request가 timeout이 될 때까지 계속 연결되어 있음 
 
-router.post('/',function(req, res, next){   
+router.post('/json',function(req, res, next){   
 
     var flag; 
     var message;
@@ -83,6 +83,8 @@ router.post('/',function(req, res, next){
         else res.status(200).json({message : "success", key : Authkey});
     }
 });
+
+//router.post('/check')
 
 
 
