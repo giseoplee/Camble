@@ -64,7 +64,8 @@ router.post('/',function(req, res, next){
 });
 
 router.post('/check',function(req, res, next){
-
+    console.log(req.body.key);
+    console.log(req.body.input_number);
     connection.query("select * from auth where id=?;",
     [req.body.key], function(error, cursor){
         if(cursor[0].auth_number!=req.body.input_number){
@@ -91,5 +92,14 @@ router.post('/check',function(req, res, next){
     });
 
 });
+
+function nickNameCheck(nick, sc_id){
+    connection.query("select * from camble_users where camble_school_id=? and user_nickname=?;",
+    [sc_id, nick], function(error, cursor){
+        if(cursor[0].length > 0){
+            res.status(503).json({message : "Duplicate aliases"});
+        }
+    }
+}
 
 module.exports = router;
