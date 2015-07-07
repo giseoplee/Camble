@@ -19,43 +19,48 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
 
 router.post('/',function(req, res, next){   
 
-    var flag; 
-    var message;
-    var returnAuth;
+     connection.query("select * from camble_users where camble_school_id=? and user_nickname=?;",
+        [req.body.camble_school_id, req.body.nickname], function(error, cursor){
+        if(cursor[0]){
+            res.status(503).json({message : "Duplicate nickname"});
+        }
+        else{
+            var flag; 
+            var message;
+            var mailOptions = {
+                from: '캠블 <camble@camble.com>',
+                to: req.body.mail_address,
+                subject: '캠블 사용자 인증번호입니다.',
+                html: '<h1>인증 번호 : '+req.body.auth_number+'</h1>'
+            };
 
-    var mailOptions = {
-        from: '캠블 <camble@camble.com>',
-        to: req.body.mail_address,
-        subject: '캠블 사용자 인증번호입니다.',
-        html: '<h1>인증 번호 : '+req.body.auth_number+'</h1>'
-    };
+            smtpTransport.sendMail(mailOptions, function(error, res){
 
-    smtpTransport.sendMail(mailOptions, function(error, res){
-
-            if (error){
-                console.log(error);
-                flag = 0;
-                message = error;
-            } else {
-                console.log("Message sent : " + res.message);
-                connection.query("insert auth set auth_number=?, nickname=?, sc_code=?, camble_school_id=?, user_mail=?;",
-                    [req.body.auth_number, req.body.nickname, req.body.sc_code, req.body.camble_school_id, req.body.mail_address],function(error, info){
-                        if(error==null){
-                            flag = 1;
-                            response(flag, info.insertId);
-                        }else{
-                            flag = 0;
-                            response(flag, info.message);
-                        }
-                    });
-                message = res.message;
-            }
-            smtpTransport.close();
-            
+                    if (error){
+                        console.log(error);
+                        flag = 0;
+                        message = error;
+                    } else {
+                        console.log("Message sent : " + res.message);
+                        connection.query("insert auth set auth_number=?, nickname=?, sc_code=?, camble_school_id=?, user_mail=?;",
+                            [req.body.auth_number, req.body.nickname, req.body.sc_code, req.body.camble_school_id, req.body.mail_address],function(error, info){
+                                if(error==null){
+                                    flag = 1;
+                                    response(flag, info.insertId);
+                                }else{
+                                    flag = 0;
+                                    response(flag, info.message);
+                                }
+                            });
+                        message = res.message;
+                    }
+                    smtpTransport.close();
+                    
+            });
+        }
     });
 
     function response(flag, Authkey){
-        var auth = returnAuth;
         if(flag==0){
             res.status(503).json(error);
         }
@@ -92,14 +97,5 @@ router.post('/check',function(req, res, next){
     });
 
 });
-
-function nickNameCheck(nick, sc_id){
-    connection.query("select * from camble_users where camble_school_id=? and user_nickname=?;",
-    [sc_id, nick], function(error, cursor){
-        if(cursor[0].length > 0){
-            res.status(503).json({message : "Duplicate aliases"});
-        }
-    });
-}
 
 module.exports = router;
