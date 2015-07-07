@@ -48,7 +48,7 @@ router.post('/',function(req, res, next){
         from: '캠블 <camble@camble.com>',
         to: req.body.mail_address,
         subject: '캠블 사용자 인증번호입니다.',
-        html: '<h1>인증 번호는 '+req.body.auth_number+'입니다!</h1>'
+        html: '<h1>인증 번호 : '+req.body.auth_number+'</h1>'
     };
 
     smtpTransport.sendMail(mailOptions, function(error, res){
@@ -59,8 +59,8 @@ router.post('/',function(req, res, next){
                 message = error;
             } else {
                 console.log("Message sent : " + res.message);
-                connection.query("insert auth set auth_number=?, nickname=?",
-                    [req.body.auth_number, req.body.nickname],function(error, info){
+                connection.query("insert auth set auth_number=?, nickname=?, sc_code=?, camble_school_id=?",
+                    [req.body.auth_number, req.body.nickname, req.body.sc_code, req.body.camble_school_id],function(error, info){
                         if(error==null){
                             flag = 1;
                             response(flag, info.insertId);
