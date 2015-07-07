@@ -61,9 +61,9 @@ router.post('/',function(req, res, next){
             } else {
                 console.log("Message sent : " + res.message);
                 connection.query("insert auth set auth_number=?",
-                    [req.body.auth_number],function(error, cursor){
+                    [req.body.auth_number],function(error, info){
                         if(error==null){
-                            returnAuth = cursor.insertId;
+                            returnAuth = info.insertId;
                             flag = 1;
                         }else{
                             flag = 0;
@@ -81,7 +81,7 @@ router.post('/',function(req, res, next){
         if(flag==0){
             res.status(503).json(error);
         }
-        else res.status(200).json({check : auth});
+        else res.status(200).json({message : "success", check : auth});
     }
 
 });
