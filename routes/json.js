@@ -137,7 +137,7 @@ var query = connection.query('create table univ_'+req.body.sc_code+'_board('+
                                              'univ_'+req.body.sc_code+'_board_id int(11) not null, '+
                                              'camble_user_id int(11) not null, '+
                                              'comment_writer varchar(45) not null, '+
-                                             'comment_contents text, '+
+                                             'comment_content text, '+
                                              'likes_count int(10) default 0, '+
                                              'created_at datetime not null, '+
                                              'updated_at datetime not null, '+

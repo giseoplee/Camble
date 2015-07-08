@@ -14,6 +14,7 @@ var new_login  = require('./routes/auth/new');
 var existing_login  = require('./routes/auth/exist');
 var content_write  = require('./routes/board/content/write');
 var content_load  = require('./routes/board/content/load');
+var comment_wirte  = require('./routes/board/comment/write');
 var board_load  = require('./routes/board/load');
 var multer = require('multer');
 
@@ -51,6 +52,7 @@ app.use('/auth/exist', existing_login);
 app.use('/board/content/write', content_write);
 app.use('/board/content/load', content_load);
 app.use('/board/load', board_load);
+app.use('/board/comment/write', comment_wirte);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
