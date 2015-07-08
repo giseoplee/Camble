@@ -16,7 +16,7 @@ var connection = mysql.createConnection({
 router.get('/:sc_code', function(req, res, next){
 	var query = connection.query("select id, posts_writer, posts_title, view_count, likes_count, created_at from univ_"+req.params.sc_code+"_board order by id desc limit 20;",
 		function(error, cursor){
-			console.log(query);
+			
 			if(error==null){
 				res.status(200).json(cursor);
 			}

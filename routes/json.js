@@ -119,7 +119,7 @@ var query = connection.query('create table univ_'+req.body.sc_code+'_board('+
                  'camble_user_id int(11) not null,'+
                  'posts_writer varchar(45) not null,'+
                  'posts_title varchar(255) not null,'+
-                 'posts_contents text, '+
+                 'posts_content text, '+
                  'posts_image varchar(200), '+
                  'view_count int(10) default 0, '+
                  'likes_count int(10) default 0, '+
