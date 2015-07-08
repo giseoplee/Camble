@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
 });
 
 router.get('/:sc_code', function(req, res, next){
-	var query = connection.query("select id, posts_writer, posts_title, posts_content , view_count, likes_count, updated_at from univ_"+req.params.sc_code+"_board order by id desc limit 20;",
+	var query = connection.query("select id, posts_writer, posts_title, posts_content , view_count, likes_count, comment_count, updated_at from univ_"+req.params.sc_code+"_board order by id desc limit 20;",
 		function(error, cursor){
 
 			if(error==null){
