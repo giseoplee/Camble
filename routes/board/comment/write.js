@@ -25,7 +25,7 @@ router.post('/', function(request, response, next) { // sc_code , user_auth_key,
                             console.log("Comment Write Success");
                             logWrite(cursor[0].id, req.body.user_auth_key, req.body.univ_board_id, info.insertId);
                         }else{
-                            res.status(503).json(message : "Comment Write Fail");
+                            res.status(503).json({message : "Comment Write Fail"});
                         }
                     });
             }else{
