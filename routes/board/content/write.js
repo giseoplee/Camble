@@ -13,6 +13,10 @@ var connection = mysql.createConnection({
 
 
 router.post('/', function(req, res, next){
+	console.log(req.body.sc_code);
+	console.log(req.body.user_auth_key);
+	console.log(req.body.posts_title);
+	console.log(req.body.posts_content);
 
 	connection.query("select school.id,user.user_nickname from camble_schools as school inner join camble_users as user on school.id=user.camble_school_id where school.sc_code=? and user.id=?;",
 		[req.body.sc_code, req.body.user_auth_key], function(error, cursor){
