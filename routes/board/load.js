@@ -11,8 +11,6 @@ var connection = mysql.createConnection({
     'database':'camble'
 });
 
-// response = univ_sc_code_board {id(글번호),  posts_writer(작성자 닉네임), posts_title(글 제목), view_count(게시글 View 갯수), likes_count(게시글 좋아요 수), created_at(게시글 작성 시간)}
-
 router.get('/:sc_code', function(req, res, next){
 	var query = connection.query("select id, posts_writer, posts_title, posts_content , view_count, likes_count, updated_at from univ_"+req.params.sc_code+"_board order by id desc limit 20;",
 		function(error, cursor){
