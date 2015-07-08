@@ -11,13 +11,32 @@ var connection = mysql.createConnection({
     'database':'camble'
 });
 
+// sc_code , user_auth_key , posts_title, posts_content, 
+// sc_id, user_id, nick, title, content
 
 
-// router.post('/', function(req, res, next){
+router.post('/', function(req, res, next){
 
-// 	connection.query("select id from camble_users where id"
+	connection.query("select school.id,user.user_nickname from camble_schools as school inner join camble_users as user on school.id=user.camble_school_id where school.sc_code=? and user.id=?;",
+		[req.body.sc_code, req.body.user_auth_key], function(error, cursor){
 
-// });
+			if(cursor.length > 0){
+				var query = connection.query("insert univ_"+req.body.sc_code+"_board set camble_school_id=?, camble_user_id=?, posts_writer=?, posts_title=?, posts_content=?, created_at=now(), updated_at=now();",
+					[cursor[0].id, req.body.user_auth_key, cursor[0].user_nickname, req.body.posts_title, req.body.posts_content], function(error, info){
+						if(error==null)
+						{
+							res.status(200).json({message : "wirte_success"});
+						}else{
+							res.status(503).json({message : "wirte_fail"});
+						}
+					}
+				 );
+			}else{
+				res.status(503).json({message : "Not Found School ID"});
+			}
+		});
+
+});
 
 
 
