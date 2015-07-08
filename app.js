@@ -16,6 +16,7 @@ var file  = require('./routes/file');
 var new_login  = require('./routes/auth/new');
 var existing_login  = require('./routes/auth/exist');
 var content_write  = require('./routes/board/content/write');
+var board_load  = require('./routes/board/load');
 var multer = require('multer');
 
 var app = express();
@@ -47,8 +48,8 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/test', test);
 app.use('/json', json);
-app.use('/debug', debug);
-app.use('/push', push);
+//app.use('/debug', debug);
+//app.use('/push', push);
 //app.use('/push2', push2);
 app.use('/file', file);
 app.use('/auth/new', new_login);

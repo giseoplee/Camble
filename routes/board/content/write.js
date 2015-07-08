@@ -11,9 +11,6 @@ var connection = mysql.createConnection({
     'database':'camble'
 });
 
-// sc_code , user_auth_key , posts_title, posts_content, 
-// sc_id, user_id, nick, title, content
-
 
 router.post('/', function(req, res, next){
 
