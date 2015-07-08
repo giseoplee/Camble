@@ -29,7 +29,7 @@ router.post('/', function(request, response, next) { // sc_code , user_auth_key,
                         }
                     });
             }else{
-                res.status(503).json(message : "Access Denied");
+                res.status(503).json({message : "Access Denied"});
             }
          
         });
