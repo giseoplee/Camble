@@ -11,7 +11,8 @@ var connection = mysql.createConnection({
 });
 
 router.post('/increment', function(req, res, next){ //sc_code : "학교 코드", user_auth_key : "사용자 키", univ_board_id : "게시판 글 번호"
-
+	
+	console.log(req.body);
 	connection.query("insert univ_"+req.body.sc_code+"_likes set content_id=?, camble_user_id=?, content_sort=1, created_at=now();",
 		[req.body.univ_board_id, req.body.user_auth_key], function(error, info){
 			if(error==null){
@@ -32,6 +33,7 @@ router.post('/increment', function(req, res, next){ //sc_code : "학교 코드",
 
 router.post('/decrement', function(req, res, next){
 
+	console.log(req.body);
 	var query = connection.query("delete from univ_"+req.body.sc_code+"_likes where content_sort=1 and content_id=? and camble_user_id=?;",
 		[req.body.univ_board_id, req.body.user_auth_key], function(error, info){
 			console.log(query);
