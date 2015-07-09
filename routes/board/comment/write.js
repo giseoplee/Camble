@@ -1,4 +1,3 @@
-// 댓글 작성
 var express = require('express');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
@@ -42,12 +41,15 @@ router.post('/', function(req, res, next) { // sc_code , user_auth_key, comment_
                     //res.status(200).json({message : "Comment Log Write Success"});
                     connection.query("update univ_"+sc_code+"_board set comment_count = comment_count+1 where id=?;", [board_id], function(error, info){
                         if(error==null){
+                            console.log("Comment Write Full Success");
                             res.status(503).json({message : "Comment Write Success"});    
                         }else{
+                            console.log("board table count update fail");
                             res.status(503).json({message : "board table count update fail"});
                         }
                     });
                 }else{
+                    console.log("Comment Log Write Fail");
                     res.status(503).json({message : "Comment Log Write Fail"});
                 }
             });
