@@ -11,10 +11,11 @@ var connection = mysql.createConnection({
 });
 
 router.post('/increment', function(req, res, next){ //sc_code : "학교 코드", user_auth_key : "사용자 키", univ_board_id : "게시판 글 번호"
-	
+
 	console.log(req.body);
-	connection.query("insert univ_"+req.body.sc_code+"_likes set content_id=?, camble_user_id=?, content_sort=1, created_at=now();",
+	var query = connection.query("insert univ_"+req.body.sc_code+"_likes set content_id=?, camble_user_id=?, content_sort=1, created_at=now();",
 		[req.body.univ_board_id, req.body.user_auth_key], function(error, info){
+			console.log(query);
 			if(error==null){
 				connection.query("update univ_"+req.body.sc_code+"_board set likes_count = likes_count+1 where id=?;", 
 				[req.body.univ_board_id], function(error, info){
