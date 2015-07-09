@@ -18,10 +18,10 @@ router.post('/', function(req, res, next){
 		[req.body.sc_code, req.body.user_auth_key], function(error, cursor){
 
 			if(cursor.length > 0){
-				var query = connection.query("insert univ_"+req.body.sc_code+"_board set camble_school_id=?, camble_user_id=?, posts_writer=?, posts_title=?, posts_content=?, created_at=now(), updated_at=now();",
+				connection.query("insert univ_"+req.body.sc_code+"_board set camble_school_id=?, camble_user_id=?, posts_writer=?, posts_title=?, posts_content=?, created_at=now(), updated_at=now();",
 					[cursor[0].id, req.body.user_auth_key, cursor[0].user_nickname, req.body.posts_title, req.body.posts_content], function(error, info){
 						if(error==null)
-						{
+						{	
 							res.status(200).json({message : "wirte_success"});
 						}else{
 							res.status(503).json({message : "wirte_fail"});

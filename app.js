@@ -6,10 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var test = require('./routes/test');
-var json = require('./routes/json');
+var json = require('./routes/temp/json');
 var push = require('./routes/push');
-var file  = require('./routes/file');
 var school_list  = require('./routes/school/list');
 var new_login  = require('./routes/auth/new');
 var existing_login  = require('./routes/auth/exist');
@@ -46,11 +44,9 @@ app.use(multer({
   }
 }));
 
-app.use('/file', file);
+
 app.use('/', routes);
-app.use('/test', test);
-app.use('/json', json);
-app.use('/file', file);
+app.use('/temp/json', json);
 app.use('/school/list', school_list);
 app.use('/auth/new', new_login);
 app.use('/auth/exist', existing_login);
