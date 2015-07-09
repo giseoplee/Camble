@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var json = require('./routes/temp/json');
-var push = require('./routes/push');
+var push = require('./routes/temp/push');
 var school_list  = require('./routes/school/list');
 var new_login  = require('./routes/auth/new');
 var existing_login  = require('./routes/auth/exist');
