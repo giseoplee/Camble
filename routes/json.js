@@ -144,19 +144,48 @@ var query = connection.query('create table univ_'+req.body.sc_code+'_board('+
                                              'foreign key (camble_user_id) references camble_users (id), '+
                                              'foreign key(univ_'+req.body.sc_code+'_board_id) references univ_'+req.body.sc_code+'_board (id) on delete cascade );',
                                               function (error, info) {
-                            if (error==null) {
-                                res.json({ message : "table_create_success" });
-                            }
-                            else
-                                connection.query("drop table univ_"+req.body.sc_code+"_board;");
-                                res.json(error);
-                            });
-                    }
-                    else{
-                        res.json(error);
-                    }
-                });
-            });
+                                                    if (error==null) {
+                                                        var print_q = connection.query("create table univ_"+req.body.sc_code+"_likes("+
+                                                                         "id int(11) not null auto_increment primary key,"+
+                                                                         "content_id int(11) not null,"+
+                                                                         "camble_user_id int(11) not null,"+
+                                                                         "content_sort tinyint(1) not null,"+
+                                                                         "created_at datetime not null,"+
+                                                                         "foreign key (camble_user_id) references camble_users (id),"+
+                                                                         "index (content_sort),"+
+                                                                         "index (content_id) );", function(error, info){
+                                                                                                        console.log(print_q);
+                                                                                                        if(error==null){
+                                                                                                            res.status(200).json({message : "All Table Create Success"});
+                                                                                                        }else{
+                                                                                                            connection.query("drop table univ_"+req.body.sc_code+"_board;");
+                                                                                                            connection.query("drop table univ_"+req.body.sc_code+"_board_comment;");
+                                                                                                            res.status(503).json({message : "Likes Table Create Fail"});
+                                                                                                        }
+                                                                                                });
+                                                                            }
+                                                                            else{
+                                                                                connection.query("drop table univ_"+req.body.sc_code+"_board;");
+                                                                                res.status(503).json(error);
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                    else{
+                                                                        res.status(503).json(error);
+                                                                    }
+                                                                });
+                                                            });
+
+// create table univ_kau_likes(
+//     id int(11) not null auto_increment primary key,
+//     content_id int(11) not null,
+//     camble_user_id int(11) not null,
+//     content_sort tinyint(1) not null,
+//     created_at datetime not null,
+//     foreign key (camble_user_id) references camble_users (id), # fk set
+//     index (content_sort),
+//     index (content_id)
+// );
 
 
 
