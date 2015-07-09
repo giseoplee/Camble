@@ -42,7 +42,7 @@ router.post('/', function(req, res, next) { // sc_code , user_auth_key, comment_
                     connection.query("update univ_"+sc_code+"_board set comment_count = comment_count+1 where id=?;", [board_id], function(error, info){
                         if(error==null){
                             console.log("Comment Write Full Success");
-                            res.status(503).json({message : "Comment Write Success"});    
+                            res.status(200).json({message : "Comment Write Success"});    
                         }else{
                             console.log("board table count update fail");
                             res.status(503).json({message : "board table count update fail"});
