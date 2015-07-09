@@ -12,7 +12,8 @@ var connection = mysql.createConnection({
 });
 
 router.post('/', function(req, res, next){
-	connection.query("update univ_"+req.body.sc_code+"_board set view_count = view_count+1 where id=?",[req.univ_board_id], function(error, info){
+	var query = connection.query("update univ_"+req.body.sc_code+"_board set view_count = view_count+1 where id=?",[req.body.univ_board_id], function(error, info){
+		console.log(query);
 		if(error==null){
 			res.status(200).json({message : "Posts View Count Up Success"});
 		}else{
