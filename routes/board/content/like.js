@@ -1,6 +1,7 @@
 var express = require('express');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
+var str2json = require('string-to-json');
 var router = express.Router();
 
 var connection = mysql.createConnection({
@@ -14,7 +15,6 @@ router.post('/increment', function(req, res, next){ //sc_code : "학교 코드",
 
 	connection.query("insert univ_"+req.body.sc_code+"_likes set content_id=?, camble_user_id=?, content_sort=1, created_at=now();",
 		[req.body.univ_board_id, req.body.user_auth_key], function(error, info){
-			console.log(query);
 			if(error==null){
 				connection.query("update univ_"+req.body.sc_code+"_board set likes_count = likes_count+1 where id=?;", 
 				[req.body.univ_board_id], function(error, info){
@@ -35,7 +35,6 @@ router.post('/decrement', function(req, res, next){
 	
 	connection.query("delete from univ_"+req.body.sc_code+"_likes where content_sort=1 and content_id=? and camble_user_id=?;",
 		[req.body.univ_board_id, req.body.user_auth_key], function(error, info){
-			console.log(query);
 			if(error==null){
 				connection.query("update univ_"+req.body.sc_code+"_board set likes_count = likes_count-1 where id=?;", 
 				[req.body.univ_board_id], function(error, info){

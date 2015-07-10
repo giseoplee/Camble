@@ -1,4 +1,3 @@
-// 댓글 좋아요 눌렀을 시
 var express = require('express');
 var fs = require('fs');
 var mysql = require('mysql');
@@ -6,7 +5,6 @@ var path = require('path');
 
 var router = express.Router();
 var connection = mysql.createConnection({
-
     user : 'user',
     password : 'appjam123',
     database : 'camble',

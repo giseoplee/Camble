@@ -8,16 +8,22 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var json = require('./routes/temp/json');
 var push = require('./routes/temp/push');
+
 var school_list  = require('./routes/school/list');
+
 var new_login  = require('./routes/auth/new');
 var existing_login  = require('./routes/auth/exist');
+
 var content_write  = require('./routes/board/content/write');
 var content_load  = require('./routes/board/content/load');
 var content_like  = require('./routes/board/content/like');
+
 var comment_load  = require('./routes/board/comment/load');
 var comment_write  = require('./routes/board/comment/write');
 var comment_like  = require('./routes/board/comment/like');
+
 var board_load  = require('./routes/board/load');
+
 var multer = require('multer');
 
 var app = express();
@@ -51,9 +57,11 @@ app.use('/school/list', school_list);
 app.use('/auth/new', new_login);
 app.use('/auth/exist', existing_login);
 app.use('/board/load', board_load);
-app.use('/board/content/write', content_write);
+
 app.use('/board/content/load', content_load);
+app.use('/board/content/write', content_write);
 app.use('/board/content/like', content_like);
+
 app.use('/board/comment/load', comment_load);
 app.use('/board/comment/write', comment_write);
 app.use('/board/comment/like', comment_like);

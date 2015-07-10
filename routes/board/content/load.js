@@ -19,7 +19,7 @@ router.post('/', function(req, res, next){
 					if(error==null){
 
 					}else{
-						like_check(req.body.sc_code, req.body.univ_board_id, req.body.user_auth_key);
+						like_check(req.body.sc_code, req.body.univ_board_id, req.body.user_auth_key, "Integration Board Update Fail, ");
 					}
 			});
 		}else{
@@ -34,7 +34,7 @@ router.post('/', function(req, res, next){
 					res.status(200).json({message : msg+"Posts View Count Up and User Like exist", like_flag : "1"});
 				}
 				else{
-					res.status(200).json({message : msg+"Posts View Count Up and User Like not exist", like_flag : "0"});
+					res.status(200).json({message : msg+"Posts View Count Up, User Like not exist", like_flag : "0"});
 				}
 		});
 	}
