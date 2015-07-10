@@ -31,10 +31,18 @@ router.post('/', function(req, res, next){
 		connection.query("select * from univ_"+sc_code+"_likes where content_sort=1 and content_id=? and camble_user_id=?", 
 			[board_id, user_id], function(error, cursor){
 				if(cursor.length>0){
-					res.status(200).json({message : msg+"Posts View Count Up and User Like exist", like_flag : "1"});
+					//res.status(200).json({message : msg+"Posts View Count Up and User Like exist", like_flag : "1"});
+					connection.query("select likes_count, comment_count, view_count from univ_"+sc_code+"_board where id=?",
+						[board_id], function(error, cursor){
+							if(error==null){
+								res.status(200).json({likes_count : cursor[0].likes_count, comment_count : cursor[0].comment_count, view_count : cursor[0], like_flag : "1"});
+							}else{
+								res.status(200).json({message : msg+"Posts View Count Up and User Like exist But Count Load Fail", like_flag : "1"});
+							}
+						});
 				}
 				else{
-					res.status(200).json({message : msg+"Posts View Count Up, User Like not exist", like_flag : "0"});
+					res.status(200).json({likes_count : cursor[0].likes_count, comment_count : cursor[0].comment_count, view_count : cursor[0], like_flag : "0"});
 				}
 		});
 	}
