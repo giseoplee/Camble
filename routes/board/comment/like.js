@@ -1,16 +1,15 @@
 var express = require('express');
-var fs = require('fs');
 var mysql = require('mysql');
-var path = require('path');
-
+var bodyParser = require('body-parser');
+var str2json = require('string-to-json');
 var router = express.Router();
+
 var connection = mysql.createConnection({
     user : 'user',
     password : 'appjam123',
     database : 'camble',
     host : 'appjam.cyjao5zjyirq.us-west-2.rds.amazonaws.com'
 });
-
 
 router.post('/increment', function(req, res, next){ //sc_code : "학교 코드", user_auth_key : "사용자 키", univ_board_id : "게시판 글 번호"
 

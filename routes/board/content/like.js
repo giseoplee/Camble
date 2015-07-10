@@ -19,7 +19,15 @@ router.post('/increment', function(req, res, next){ //sc_code : "학교 코드",
 				connection.query("update univ_"+req.body.sc_code+"_board set likes_count = likes_count+1 where id=?;", 
 				[req.body.univ_board_id], function(error, info){
 					if(error==null){
-						res.status(200).json({message : "Like Increment all Success"});	
+						var query = connenction.query("update camble_integration_board set likes_count = likes_count+1 where sc_code=? and univ_board_id=?;",
+							[req.body.s_code, req.body.univ_board_id], function(error, info){
+								console.log(query);
+								if(error==null){
+									res.status(200).json({message : "Like Increment all Success"});		
+								}else{
+									res.status(503).json({message : "Like Count to Integration Board Update Fail"});		
+								}
+							});
 					}else{
 						res.status(503).json({message : "Like Count Update Fail"});	
 					}
@@ -39,7 +47,14 @@ router.post('/decrement', function(req, res, next){
 				connection.query("update univ_"+req.body.sc_code+"_board set likes_count = likes_count-1 where id=?;", 
 				[req.body.univ_board_id], function(error, info){
 					if(error==null){
-						res.status(200).json({message : "Like Decrement all Success"});
+						connenction.query("update camble_integration_board set likes_count = likes_count-1 where sc_code=? and univ_board_id=?;",
+							[req.body.s_code, req.body.univ_board_id], function(error, info){
+								if(error==null){
+									res.status(200).json({message : "Like Decrement all Success"});		
+								}else{
+									res.status(503).json({message : "Like Count to Integration Board Update Fail"});		
+								}
+							});
 					}else{
 						res.status(503).json({message : "Like Count Update Fail"});
 					}
