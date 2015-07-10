@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
 });
 
 router.post('/', function(req, res, next){
-	
+	console.log("rename");
 });
 
 
