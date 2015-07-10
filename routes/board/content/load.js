@@ -35,7 +35,7 @@ router.post('/', function(req, res, next){
 					connection.query("select likes_count, comment_count, view_count from univ_"+sc_code+"_board where id=?",
 						[board_id], function(error, cursor){
 							if(error==null){
-								res.status(200).json({likes_count : cursor[0].likes_count, comment_count : cursor[0].comment_count, view_count : cursor[0], like_flag : "1"});
+								res.status(200).json({likes_count : cursor[0].likes_count, comment_count : cursor[0].comment_count, view_count : cursor[0].view_count, like_flag : "1"});
 							}else{
 								res.status(200).json({message : msg+"Posts View Count Up and User Like exist But Count Load Fail", like_flag : "1"});
 							}
@@ -45,7 +45,7 @@ router.post('/', function(req, res, next){
 					connection.query("select likes_count, comment_count, view_count from univ_"+sc_code+"_board where id=?",
 						[board_id], function(error, cursor){
 							if(error==null){
-								res.status(200).json({likes_count : cursor[0].likes_count, comment_count : cursor[0].comment_count, view_count : cursor[0], like_flag : "0"});
+								res.status(200).json({likes_count : cursor[0].likes_count, comment_count : cursor[0].comment_count, view_count : cursor[0].view_count, like_flag : "0"});
 							}else{
 								res.status(200).json({message : msg+"Posts View Count Up and User Like exist But Count Load Fail", like_flag : "0"});
 							}
