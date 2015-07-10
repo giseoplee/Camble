@@ -25,6 +25,8 @@ var comment_like  = require('./routes/board/comment/like');
 
 var integration_board  = require('./routes/integration/board/load');
 
+var mail  = require('./routes/mail');
+
 
 
 var multer = require('multer');
@@ -57,6 +59,7 @@ app.use('/school/list', school_list);
 app.use('/auth/new', new_login);
 app.use('/auth/exist', existing_login);
 app.use('/board/load', board_load);
+app.use('./routes/mail', mail);
 
 app.use('/board/content/load', content_load);
 app.use('/board/content/write', content_write);
