@@ -14,10 +14,11 @@ var connection = mysql.createConnection({
 router.post('/', function(req, res, next){
 	connection.query("update univ_"+req.body.sc_code+"_board set view_count = view_count+1 where id=?",[req.body.univ_board_id], function(error, info){
 		if(error==null){
-			connection.query("update camble_integration_board set view_count = view_count+1 where camble_school_code=?, univ_board_id=?;",
+			var query = connection.query("update camble_integration_board set view_count = view_count+1 where camble_school_code=? and univ_board_id=?;",
 				[req.body.sc_code, req.body.univ_board_id], function(error, info){
+					console.log(query);
 					if(error==null){
-
+						like_check(req.body.sc_code, req.body.univ_board_id, req.body.user_auth_key, "Integration Board Update Success, ");
 					}else{
 						like_check(req.body.sc_code, req.body.univ_board_id, req.body.user_auth_key, "Integration Board Update Fail, ");
 					}
