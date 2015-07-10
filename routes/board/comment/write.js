@@ -39,7 +39,14 @@ router.post('/', function(req, res, next) {
                 if(error==null){
                     connection.query("update univ_"+sc_code+"_board set comment_count = comment_count+1 where id=?;", [board_id], function(error, info){
                         if(error==null){
-                            res.status(200).json({message : "Comment Write Success"});    
+                            connection.query("update camble_integration_board set comment_count = comment_count+1 where camble_school_code=? and univ_board_id=?;",
+                                [sc_code, board_id], function(error, info){
+                                    if(error==null){
+                                        res.status(200).json({message : "Comment Write Full Success"});    
+                                    }else{
+                                        res.status(200).json({message : "Integration Board Write Fail"});    
+                                    }
+                                });
                         }else{
                             res.status(503).json({message : "board table count update fail"});
                         }
@@ -53,3 +60,8 @@ router.post('/', function(req, res, next) {
 });           
 
 module.exports = router;
+
+
+
+
+

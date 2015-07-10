@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
 });
 
 router.get('/', function(req, res, next){
-	var query = connection.query("select id, posts_writer, posts_title, posts_content , view_count, likes_count, comment_count, updated_at from camble_integration_board order by id desc limit 20;",
+	var query = connection.query("select id, posts_writer, posts_title, posts_content , view_count, likes_count, comment_count, camble_school_code, updated_at from camble_integration_board order by id desc limit 20;",
 		function(error, cursor){
 
 			if(error==null){

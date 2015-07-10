@@ -14,6 +14,7 @@ var school_list  = require('./routes/school/list');
 var new_login  = require('./routes/auth/new');
 var existing_login  = require('./routes/auth/exist');
 
+var board_load  = require('./routes/board/load');
 var content_write  = require('./routes/board/content/write');
 var content_load  = require('./routes/board/content/load');
 var content_like  = require('./routes/board/content/like');
@@ -22,7 +23,9 @@ var comment_load  = require('./routes/board/comment/load');
 var comment_write  = require('./routes/board/comment/write');
 var comment_like  = require('./routes/board/comment/like');
 
-var board_load  = require('./routes/board/load');
+var integration_board  = require('./routes/integration/board/load');
+
+
 
 var multer = require('multer');
 
@@ -65,6 +68,8 @@ app.use('/board/content/like', content_like);
 app.use('/board/comment/load', comment_load);
 app.use('/board/comment/write', comment_write);
 app.use('/board/comment/like', comment_like);
+
+app.use('/integration/board/load', integration_board);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
