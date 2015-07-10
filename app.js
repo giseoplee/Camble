@@ -36,10 +36,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-// app.use(express.json()); // http 리퀘스트 body json 형태 사용 가능
-// app.use(express.urlencoded());
-// app.use(express.multipart()); // 파일 업로드 사용
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
