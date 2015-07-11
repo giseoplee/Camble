@@ -32,11 +32,11 @@ var multer = require('multer');
 
 var app = express();
 
-app.get('/header_img', function(req , res){
-  fs.readFile('./routes/mail/mail.jpg',function(error, data){
-    res.end(data);
-  });
-});
+// app.get('/header_img', function(req , res){
+//   fs.readFile('./routes/mail/mail.jpg',function(error, data){
+//     res.end(data);
+//   });
+// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
