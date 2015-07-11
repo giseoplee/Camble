@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 
 var routes = require('./routes/index');
 var json = require('./routes/temp/json');
@@ -30,6 +31,12 @@ var integration_board  = require('./routes/integration/board/load');
 var multer = require('multer');
 
 var app = express();
+
+app.get('/header_img', function(req , res){
+  fs.readFile('./routes/mail/mail.jpg',function(error, data){
+    res.end(data);
+  });
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -102,4 +109,4 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
-//app.listen(3000);
+app.listen(3000);

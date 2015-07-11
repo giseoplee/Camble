@@ -31,7 +31,7 @@ router.post('/',function(req, res, next){
                 from: '캠블 <camble@camble.com>',
                 to: req.body.mail_address,
                 subject: '캠블 사용자 인증번호입니다.',
-                html: '<h1>인증 번호 : '+req.body.auth_number+'</h1>'
+                html: "<h3>인증 번호 : "+req.body.auth_number+" 왜 안먹히지</h3>"
             };
 
             smtpTransport.sendMail(mailOptions, function(error, res){
